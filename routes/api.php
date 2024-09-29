@@ -17,6 +17,6 @@ use App\Http\Controllers\TransactionController;
 */
 
 
-Route::get('/user/{userId}/balances', [TransactionController::class, 'calculateBalances']);
-Route::get('/user/{userId}/calculatetransactions', [TransactionController::class, 'calculateTransaction']);
+Route::middleware('api')->get('/user/{userId}/balances', [TransactionController::class, 'calculateBalances']);
+Route::middleware('api')->get('/user/{userId}/calculatetransactions', [TransactionController::class, 'calculateTransaction']);
 
