@@ -16,7 +16,7 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-Route::get('/user/{userId}/transactions', [TransactionController::class, 'getUserTransactionBalances']);
+
+Route::get('/user/{userId}/balances', [TransactionController::class, 'calculateBalances']);
+Route::get('/user/{userId}/calculatetransactions', [TransactionController::class, 'calculateTransaction']);
+

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('trans_plaid_trans_id');
             $table->string('trans_plaid_categories');
             $table->decimal('trans_plaid_amount', 10, 2);
+            $table->enum('trans_type', ['debit', 'credit']);
             $table->unsignedBigInteger('trans_plaid_category_id');
             $table->date('trans_plaid_date');
             $table->string('trans_plaid_name');

@@ -15,6 +15,7 @@ class TransactionSeeder extends Seeder
     { include_once(database_path('seeders/transaction.php'));
 
         foreach ($transaction as $trans) {
+            $type = $trans['trans_plaid_amount'] < 0 ? 'debit' : 'credit';
             Transaction::create([
                 'trans_id' => $trans['trans_id'],
                 'trans_user_id' => $trans['trans_user_id'],
@@ -23,6 +24,7 @@ class TransactionSeeder extends Seeder
                 'trans_plaid_amount' => $trans['trans_plaid_amount'],
                 'trans_plaid_category_id' => $trans['trans_plaid_category_id'],
                 'trans_plaid_date' => $trans['trans_plaid_date'],
+                'trans_type' => $type,
                 'trans_plaid_name' => $trans['trans_plaid_name'],
             ]);
         }
