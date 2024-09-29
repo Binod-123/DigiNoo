@@ -10,7 +10,6 @@ class TokenMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        // Check for the static token in the Authorization header
         if ($request->header('Authorization') !== 'Bearer '. env('STATIC_API_TOKEN')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
