@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('trans_plaid_category_id');
             $table->date('trans_plaid_date');
             $table->string('trans_plaid_name');
-            $table->timestamps();
         });
     }
 

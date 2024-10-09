@@ -18,7 +18,6 @@ class Transaction extends Model
         'trans_plaid_category_id',
         'trans_plaid_date',
         'trans_plaid_name',
-        'created_at',
-        'updated_at'
+        'trans_type'
     ];
 }

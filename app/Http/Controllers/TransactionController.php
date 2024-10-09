@@ -30,24 +30,29 @@ class TransactionController extends Controller
         }
         return $transactionAfterBalances;
     }
-   
+    //daily closing balances
+   private function daily_closing_balance($userId){
+    $balances = $this->getUserTransactionBalances($userId);
+        
+    $dailyClosingBalances = [];
+
+    foreach ($balances as $transaction) {
+        $date = $transaction['trans_plaid_date'];
+        $balance = $transaction['transaction_after_balance'];
+
+        $dailyClosingBalances[$date] = $balance;  
+    }
+
+    ksort($dailyClosingBalances);  
+
+    $closingBalances = array_slice($dailyClosingBalances, -90, null, true);
+    return  $closingBalances;
+   }
     public function calculateBalances($userId)
     {
-        $balances = $this->getUserTransactionBalances($userId);
         
-        $dailyClosingBalances = [];
-
-        foreach ($balances as $transaction) {
-            $date = $transaction['trans_plaid_date'];
-            $balance = $transaction['transaction_after_balance'];
-
-            $dailyClosingBalances[$date] = $balance;  
-        }
-
-        ksort($dailyClosingBalances);  
-
-        $closingBalances = array_slice($dailyClosingBalances, -90, null, true);
         //daily_closing_balances
+        $closingBalances=$this->daily_closing_balance($userId);
         $totalBalance = array_sum($closingBalances);
             //90_days_average_balance
         $averageBalance = count($closingBalances) > 0 ? $totalBalance / count($closingBalances) : 0;
